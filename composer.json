@@ -1,0 +1,33 @@
+{
+    "name": "mimosafa/php-enumeration",
+    "description": "A powerful PHP 8.1+ library to create inheritable, feature-rich enumerations that extend beyond native enum capabilities.",
+    "keywords": [
+        "enum",
+        "enumeration",
+        "inheritable-enum",
+        "advanced-enum"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mimoto, Toshimichi",
+            "email": "mimosafa@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Enumeration\\": "src"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
