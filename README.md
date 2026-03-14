@@ -54,6 +54,7 @@ composer require mimosafa/php-enumeration
 ### Pure Enums
 
 Create a simple enum without backed values. The `toArray()` method allows for dynamic definition of cases.
+If you want IDE autocompletion for magic static calls like `Status::PUBLISHED()`, add `@method` annotations to the child class PHPDoc as shown below.
 
 ```php
 use Enumeration\PureEnum;
@@ -106,6 +107,7 @@ class SourceFiles extends PureEnum
 ### Backed Enums
 
 Create enums with scalar values.
+If you want IDE autocompletion for magic static calls like `Suit::Diamonds()`, add `@method` annotations to the child class PHPDoc as shown below.
 
 ```php
 use Enumeration\BackedEnum;

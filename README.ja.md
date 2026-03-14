@@ -52,6 +52,7 @@ composer require mimosafa/php-enumeration
 ### Pure Enum（純粋な列挙型）
 
 値を持たないシンプルな列挙型を作成します。`toArray()` メソッドは、ケースを動的に定義することを可能にします。
+`Status::PUBLISHED()` のようなマジックな静的呼び出しをIDEで補完したい場合は、以下のように子クラスのPHPDocへ `@method` 注釈を追加してください。
 
 ```php
 use Enumeration\PureEnum;
@@ -104,6 +105,7 @@ class SourceFiles extends PureEnum
 ### Backed Enum（値を持つ列挙型）
 
 スカラー値を持つ列挙型を作成します。
+`Suit::Diamonds()` のようなマジックな静的呼び出しをIDEで補完したい場合は、以下のように子クラスのPHPDocへ `@method` 注釈を追加してください。
 
 ```php
 use Enumeration\BackedEnum;

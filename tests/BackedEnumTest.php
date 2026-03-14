@@ -6,13 +6,15 @@ namespace Tests {
     use ValueError;
 
     beforeEach(function () {
+        /** @var TestCase $this */
         $array = Suit::toArray();
         $names = array_keys($array);
-        $this->name = $names[rand(0, count($names) - 1)];
+        $this->name = $names[array_rand($names)];
         $this->value = $array[$this->name];
     });
 
     test('try from', function () {
+        /** @var TestCase $this */
         $case = Suit::tryFrom($this->value);
         expect($case)->toBeInstanceOf(Suit::class)
             ->and($case->name)->toBe($this->name)
@@ -22,6 +24,7 @@ namespace Tests {
     });
 
     test('from', function () {
+        /** @var TestCase $this */
         $case = Suit::from($this->value);
         expect($case)->toBeInstanceOf(Suit::class)
             ->and($case->name)->toBe($this->name)

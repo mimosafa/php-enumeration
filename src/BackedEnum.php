@@ -10,15 +10,12 @@ use ValueError;
 /**
  * A base class for creating inheritable, backed enumerations.
  *
- * For IDE autocompletion with magic static calls, it is recommended to add
- * `@method` annotations to your child class. e.g.:
- * ```
- * /**
- *  * @method static self Hearts()
- *  * @method static self Diamonds()
- *  *\/
- * class Suit extends BackedEnum { ... }
- * ```
+ * For IDE autocompletion with magic static calls, add @method annotations to
+ * the child class PHPDoc.
+ *
+ * Example child class annotations:
+ * @method static self Hearts()
+ * @method static self Diamonds()
  */
 abstract class BackedEnum extends PureEnum
 {

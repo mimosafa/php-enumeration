@@ -11,15 +11,12 @@ use ValueError;
 /**
  * A base class for creating inheritable, pure enumerations.
  *
- * For IDE autocompletion with magic static calls, it is recommended to add
- * `@method` annotations to your child class. e.g.:
- * ```
- * /**
- *  * @method static self PENDING()
- *  * @method static self PUBLISHED()
- *  *\/
- * class Status extends PureEnum { ... }
- * ```
+ * For IDE autocompletion with magic static calls, add @method annotations to
+ * the child class PHPDoc.
+ *
+ * Example child class annotations:
+ * @method static self PENDING()
+ * @method static self PUBLISHED()
  */
 abstract class PureEnum
 {
