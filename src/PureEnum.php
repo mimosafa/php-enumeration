@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Enumeration;
 
+use Enumeration\Attributes\DisableCaseNameStaticCall;
 use Error;
 use LogicException;
 use ValueError;
@@ -168,6 +169,6 @@ abstract class PureEnum
      */
     protected static function enableCaseNameStaticCall(): bool
     {
-        return true;
+        return (new \ReflectionClass(static::class))->getAttributes(DisableCaseNameStaticCall::class) === [];
     }
 }

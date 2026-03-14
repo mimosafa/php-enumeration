@@ -185,6 +185,30 @@ class AdminRole extends UserRole
 }
 ```
 
+You can also configure this declaratively with PHP attributes (useful for IDE discoverability):
+
+```php
+use Enumeration\Attributes\ExcludeConstants;
+use Enumeration\Attributes\IncludeConstants;
+
+#[ExcludeConstants('SuperAdmin')]
+class SiteUserRole extends UserRole
+{
+}
+
+#[IncludeConstants('Admin', 'SuperAdmin')]
+class AdminRole extends UserRole
+{
+}
+```
+
+Available attributes:
+
+- `#[IncludeConstants('A', 'B')]`
+- `#[ExcludeConstants('A', 'B')]`
+- `#[AllowDuplicateValues(false)]`
+- `#[DisableCaseNameStaticCall]` (for `PureEnum` subclasses)
+
 **3. Use them in your application:**
 
 ```php

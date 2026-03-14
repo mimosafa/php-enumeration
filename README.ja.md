@@ -183,6 +183,30 @@ class AdminRole extends UserRole
 }
 ```
 
+PHP Attribute を使って、より宣言的に設定することもできます（IDE 上で発見しやすいです）。
+
+```php
+use Enumeration\Attributes\ExcludeConstants;
+use Enumeration\Attributes\IncludeConstants;
+
+#[ExcludeConstants('SuperAdmin')]
+class SiteUserRole extends UserRole
+{
+}
+
+#[IncludeConstants('Admin', 'SuperAdmin')]
+class AdminRole extends UserRole
+{
+}
+```
+
+利用できる Attribute:
+
+- `#[IncludeConstants('A', 'B')]`
+- `#[ExcludeConstants('A', 'B')]`
+- `#[AllowDuplicateValues(false)]`
+- `#[DisableCaseNameStaticCall]`（`PureEnum` のサブクラス向け）
+
 **3. アプリケーションで利用します:**
 
 ```php

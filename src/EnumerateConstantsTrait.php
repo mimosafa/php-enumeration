@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Enumeration;
 
+use Enumeration\Attributes\AllowDuplicateValues;
+use Enumeration\Attributes\ExcludeConstants;
+use Enumeration\Attributes\IncludeConstants;
 use LogicException;
 use ReflectionClass;
 
@@ -21,6 +24,11 @@ trait EnumerateConstantsTrait
      * @var array<class-string, array<string, mixed>>
      */
     protected static array $enumeratedConstants = [];
+
+    /**
+     * @var array<class-string, ReflectionClass<object>>
+     */
+    protected static array $reflectionCache = [];
 
     /**
      * Returns the enumerated constants as an array.
@@ -86,7 +94,16 @@ trait EnumerateConstantsTrait
      */
     protected static function includedConstantsFromEnumeration(): array
     {
-        return [];
+        $attribute = static::reflection()->getAttributes(IncludeConstants::class)[0] ?? null;
+
+        if ($attribute === null) {
+            return [];
+        }
+
+        /** @var IncludeConstants $instance */
+        $instance = $attribute->newInstance();
+
+        return $instance->names;
     }
 
     /**
@@ -98,7 +115,16 @@ trait EnumerateConstantsTrait
      */
     protected static function excludedConstantsFromEnumeration(): array
     {
-        return [];
+        $attribute = static::reflection()->getAttributes(ExcludeConstants::class)[0] ?? null;
+
+        if ($attribute === null) {
+            return [];
+        }
+
+        /** @var ExcludeConstants $instance */
+        $instance = $attribute->newInstance();
+
+        return $instance->names;
     }
 
     /**
@@ -108,7 +134,16 @@ trait EnumerateConstantsTrait
      */
     protected static function allowDuplicateValues(): bool
     {
-        return true;
+        $attribute = static::reflection()->getAttributes(AllowDuplicateValues::class)[0] ?? null;
+
+        if ($attribute === null) {
+            return true;
+        }
+
+        /** @var AllowDuplicateValues $instance */
+        $instance = $attribute->newInstance();
+
+        return $instance->allow;
     }
 
     /**
@@ -120,5 +155,13 @@ trait EnumerateConstantsTrait
     protected static function validateConstantValue(mixed $value): bool
     {
         return true;
+    }
+
+    /**
+     * @return ReflectionClass<object>
+     */
+    protected static function reflection(): ReflectionClass
+    {
+        return self::$reflectionCache[static::class] ??= new ReflectionClass(static::class);
     }
 }

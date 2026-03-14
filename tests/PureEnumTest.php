@@ -2,6 +2,7 @@
 
 namespace Tests {
 
+    use Tests\PureEnumTest\AttributeDisabledCaseNameStaticCallSuit;
     use Tests\PureEnumTest\DisabledCaseNameStaticCallSuit;
     use Tests\PureEnumTest\Suit;
     use Error;
@@ -48,10 +49,15 @@ namespace Tests {
         expect(fn () => DisabledCaseNameStaticCallSuit::Hearts())->toThrow(Error::class);
     });
 
+    test('disable case name static call with attribute', function () {
+        expect(fn () => AttributeDisabledCaseNameStaticCallSuit::Hearts())->toThrow(Error::class);
+    });
+
 }
 
 namespace Tests\PureEnumTest {
 
+    use Enumeration\Attributes\DisableCaseNameStaticCall;
     use Enumeration\PureEnum;
 
     /**
@@ -76,5 +82,10 @@ namespace Tests\PureEnumTest {
         {
             return false;
         }
+    }
+
+    #[DisableCaseNameStaticCall]
+    class AttributeDisabledCaseNameStaticCallSuit extends Suit
+    {
     }
 }
