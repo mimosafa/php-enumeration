@@ -1,0 +1,21 @@
+name: CD (Packagist)
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  notify-packagist:
+    name: Notify Packagist
+    runs-on: ubuntu-latest
+    if: ${{ secrets.PACKAGIST_USERNAME != '' && secrets.PACKAGIST_TOKEN != '' }}
+
+    steps:
+      - name: Trigger update on Packagist
+        run: |
+          curl -X POST \
+            "https://packagist.org/api/update-package?username=${{ secrets.PACKAGIST_USERNAME }}&apiToken=${{ secrets.PACKAGIST_TOKEN }}" \
+            -H 'content-type:application/json' \
+            -d '{"repository":{"url":"https://github.com/mimosafa/php-enumeration"}}'
