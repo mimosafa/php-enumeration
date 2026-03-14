@@ -50,28 +50,27 @@ trait EnumerateConstantsTrait
         $excluded = static::excludedConstantsFromEnumeration();
         $duplicatable = static::allowDuplicateValues();
 
-        $filter = function ($value, string $key) use ($included, $excluded, $duplicatable): bool
-            {
-                static $cache = [];
+        $filter = function ($value, string $key) use ($included, $excluded, $duplicatable): bool {
+            static $cache = [];
 
-                if (! empty($included)) {
-                    if (! in_array($key, $included, true)) {
-                        return false;
-                    }
-                } else if (! empty($excluded)) {
-                    if (in_array($key, $excluded, true)) {
-                        return false;
-                    }
+            if (! empty($included)) {
+                if (! in_array($key, $included, true)) {
+                    return false;
                 }
-                if (! $duplicatable) {
-                    if (in_array($value, $cache, true)) {
-                        throw new LogicException("Duplicate value found in enum constants: " . (string) $value);
-                    }
-                    $cache[] = $value;
+            } elseif (! empty($excluded)) {
+                if (in_array($key, $excluded, true)) {
+                    return false;
                 }
-
-                return static::validateConstantValue($value);
             }
+            if (! $duplicatable) {
+                if (in_array($value, $cache, true)) {
+                    throw new LogicException("Duplicate value found in enum constants: " . (string) $value);
+                }
+                $cache[] = $value;
+            }
+
+            return static::validateConstantValue($value);
+        }
         ;
 
         return array_filter($constants, $filter, ARRAY_FILTER_USE_BOTH);

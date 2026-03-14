@@ -18,12 +18,20 @@
         "php": "^8.1"
     },
     "require-dev": {
-        "pestphp/pest": "^3.8"
+        "pestphp/pest": "^3.8",
+        "phpstan/phpstan": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.94"
     },
     "autoload": {
         "psr-4": {
             "Enumeration\\": "src"
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "analyse": "vendor/bin/phpstan analyse",
+        "format": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php",
+        "format:check": "vendor/bin/php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.dist.php"
     },
     "config": {
         "allow-plugins": {

@@ -35,7 +35,7 @@ namespace Tests {
         expect($case)->toBeInstanceOf(Suit::class);
         expect($case->name)->toBe($name);
 
-        expect(fn() => Suit::of('not_' . $name))->toThrow(ValueError::class);
+        expect(fn () => Suit::of('not_' . $name))->toThrow(ValueError::class);
     });
 
     test('get instance by name string static method', function () {
@@ -45,7 +45,7 @@ namespace Tests {
     });
 
     test('disable case name static call', function () {
-        expect(fn() => DisabledCaseNameStaticCallSuit::Hearts())->toThrow(Error::class);
+        expect(fn () => DisabledCaseNameStaticCallSuit::Hearts())->toThrow(Error::class);
     });
 
 }

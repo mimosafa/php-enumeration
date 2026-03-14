@@ -30,7 +30,7 @@ namespace Tests {
             ->and($case->name)->toBe($this->name)
             ->and($case->value)->toBe($this->value);
 
-        expect(fn() => Suit::from('not_' . $this->value))->toThrow(ValueError::class);
+        expect(fn () => Suit::from('not_' . $this->value))->toThrow(ValueError::class);
     });
 
 }

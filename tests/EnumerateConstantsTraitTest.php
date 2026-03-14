@@ -50,10 +50,10 @@ namespace Tests\EnumerateConstantsTraitTest {
     {
         use EnumerateConstantsTrait;
 
-        const Hearts = 'H';
-        const Diamonds = 'D';
-        const Clubs = 'C';
-        const Spades = 'S';
+        public const Hearts = 'H';
+        public const Diamonds = 'D';
+        public const Clubs = 'C';
+        public const Spades = 'S';
     }
 
     class SuitIncludeReds extends Suit

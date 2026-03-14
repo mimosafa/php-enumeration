@@ -1,0 +1,17 @@
+parameters:
+    level: max
+    paths:
+        - src
+    tmpDir: var/phpstan
+    ignoreErrors:
+        # Enum base classes are designed to be extended with varying constructor
+        # shapes, so new static() warnings are accepted by design.
+        - identifier: new.static
+          path: src/PureEnum.php
+        # BackedEnum similarly accepts new static($name, $value) by design.
+        - identifier: new.static
+          path: src/BackedEnum.php
+        # The trait is not directly used in src; usage is primarily in consumers
+        # and tests, so trait.unused is noisy for this library structure.
+        - identifier: trait.unused
+          path: src/EnumerateConstantsTrait.php

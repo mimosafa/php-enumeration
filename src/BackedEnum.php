@@ -35,8 +35,7 @@ abstract class BackedEnum extends PureEnum
     protected function __construct(
         public readonly string $name,
         public readonly string|int|float|bool $value,
-    )
-    {
+    ) {
     }
 
     /**
